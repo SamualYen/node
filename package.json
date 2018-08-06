@@ -1,0 +1,23 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "for remote server",
+  "main": "server.js",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "is-typedarray": "^1.0.0",
+    "ms": "^2.1.1",
+    "nan": "^2.10.0",
+    "nodejs-websocket": "^1.7.1",
+    "typedarray-to-buffer": "^3.1.5",
+    "websocket": "^1.0.26",
+    "yaeti": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
