@@ -1,5 +1,8 @@
 var ws = require("nodejs-websocket");
 console.log("Begin to build websocket...")
+
+const PORT = process.env.PORT || 7878;
+
 var screenReady = false;
 var pepperReady = false;
 var screen = null;
@@ -36,5 +39,5 @@ var server = ws.createServer(function(conn) {
     conn.on("error", function(code, reason) {
         console.log("Websocket error")
     });
-}).listen(8001)
+}).listen(PORT)
 console.log("WebSocket has done.")
