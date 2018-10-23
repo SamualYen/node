@@ -1,12 +1,14 @@
 var ws = require("nodejs-websocket");
 console.log("Begin to build websocket...")
 
-const PORT = process.env.PORT || 7878;
+const PORT = process.env.PORT || 8080;
 
 var screenReady = false;
 var pepperReady = false;
 var screen = null;
 var pepper = null;
+var mscreen = null;
+var mpepper = null;
 var server = ws.createServer(function(conn) {
     conn.on("text", function(str) {
         console.log("Received data is:" + str)
@@ -30,6 +32,31 @@ var server = ws.createServer(function(conn) {
         if (str === "Pepper Ping") {
             conn.sendText("Pepper Pong");
             console.log("Sended data is:Pepper Pong")
+        }
+        conn.sendText(str);
+    })
+    conn.on("text", function(str) {
+        console.log("Received data is:" + str)
+        if (str === "miyakoscreen") {
+            mscreen = conn;
+            mscreenReady = true;
+            console.log("miyako Screen is ready")
+        }
+        if (str === "miyakopepper") {
+            mpepper = conn;
+            mpepperReady = true;
+            console.log("miyako Pepper is ready")
+        }
+        if (mscreenReady && mpepperReady) {
+            mscreen.sendText(str);
+        }
+        if (str === "miyako Screen Ping") {
+            conn.sendText("miyako Screen Pong");
+            console.log("Sended data is:miyako Screen Pong")
+        }
+        if (str === "miyako Pepper Ping") {
+            conn.sendText("miyako Pepper Pong");
+            console.log("Sended data is:miyako Pepper Pong")
         }
         conn.sendText(str);
     })
