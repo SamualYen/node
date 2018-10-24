@@ -35,10 +35,6 @@ var server = ws.createServer(function(conn) {
             conn.sendText("Pepper Pong");
             console.log("Sended data is:Pepper Pong")
         }
-        conn.sendText(str);
-    })
-    conn.on("text", function(str) {
-        console.log("Received data is:" + str)
         if (str === "mscreen") {
             mscreen = conn;
             mscreenReady = true;
