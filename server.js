@@ -2,6 +2,7 @@ var ws = require("nodejs-websocket");
 console.log("Begin to build websocket...")
 
 const PORT = process.env.PORT || 8080;
+const PORT2 = process.env.PORT || 8081;
 
 var screenReady = false;
 var pepperReady = false;
@@ -11,6 +12,7 @@ var screen = null;
 var pepper = null;
 var mscreen = null;
 var mpepper = null;
+
 var server = ws.createServer(function(conn) {
     conn.on("text", function(str) {
         console.log("Received data is:" + str)
@@ -35,6 +37,20 @@ var server = ws.createServer(function(conn) {
             conn.sendText("Pepper Pong");
             console.log("Sended data is:Pepper Pong")
         }
+        conn.sendText(str);
+    })
+    conn.on("close", function(code, reason) {
+        console.log("Websocket closed")
+    });
+    conn.on("error", function(code, reason) {
+        console.log("Websocket error")
+    });
+}).listen(PORT)
+console.log("WebSocket has done.")
+
+var server2 = ws.createServer(function(mconn) {
+    mconn.on("text", function(str) {
+        console.log("Received data is:" + str)
         if (str === "mscreen") {
             mscreen = conn;
             mscreenReady = true;
@@ -49,20 +65,20 @@ var server = ws.createServer(function(conn) {
             mscreen.sendText(str);
         }
         if (str === "miyako Screen Ping") {
-            conn.sendText("miyako Screen Pong");
+            mconn.sendText("miyako Screen Pong");
             console.log("Sended data is:miyako Screen Pong")
         }
         if (str === "miyako Pepper Ping") {
-            conn.sendText("miyako Pepper Pong");
+            mconn.sendText("miyako Pepper Pong");
             console.log("Sended data is:miyako Pepper Pong")
         }
-        conn.sendText(str);
+        mconn.sendText(str);
     })
-    conn.on("close", function(code, reason) {
-        console.log("Websocket closed")
+    mconn.on("close", function(code, reason) {
+        console.log("Miyako Websocket closed")
     });
-    conn.on("error", function(code, reason) {
-        console.log("Websocket error")
+    mconn.on("error", function(code, reason) {
+        console.log("Miyako Websocket error")
     });
-}).listen(PORT)
-console.log("WebSocket has done.")
+}).listen(PORT2)
+console.log("Miyako WebSocket has done.")
