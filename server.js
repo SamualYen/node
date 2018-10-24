@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 8080;
 
 var screenReady = false;
 var pepperReady = false;
+var mscreenReady = false;
+var mpepperReady = false;
 var screen = null;
 var pepper = null;
 var mscreen = null;
