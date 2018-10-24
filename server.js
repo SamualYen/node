@@ -39,12 +39,12 @@ var server = ws.createServer(function(conn) {
     })
     conn.on("text", function(str) {
         console.log("Received data is:" + str)
-        if (str === "miyakoscreen") {
+        if (str === "mscreen") {
             mscreen = conn;
             mscreenReady = true;
             console.log("miyako Screen is ready")
         }
-        if (str === "miyakopepper") {
+        if (str === "mpepper") {
             mpepper = conn;
             mpepperReady = true;
             console.log("miyako Pepper is ready")
