@@ -48,8 +48,8 @@ var server = ws.createServer(function(conn) {
 }).listen(PORT)
 console.log("WebSocket has done.")
 
-var server2 = ws.createServer(function(mconn) {
-    mconn.on("text", function(str) {
+var server2 = ws.createServer(function(conn) {
+    conn.on("text", function(str) {
         console.log("Received data is:" + str)
         if (str === "mscreen") {
             mscreen = conn;
@@ -65,19 +65,19 @@ var server2 = ws.createServer(function(mconn) {
             mscreen.sendText(str);
         }
         if (str === "miyako Screen Ping") {
-            mconn.sendText("miyako Screen Pong");
+            conn.sendText("miyako Screen Pong");
             console.log("Sended data is:miyako Screen Pong")
         }
         if (str === "miyako Pepper Ping") {
-            mconn.sendText("miyako Pepper Pong");
+            conn.sendText("miyako Pepper Pong");
             console.log("Sended data is:miyako Pepper Pong")
         }
-        mconn.sendText(str);
+        conn.sendText(str);
     })
-    mconn.on("close", function(code, reason) {
+    conn.on("close", function(code, reason) {
         console.log("Miyako Websocket closed")
     });
-    mconn.on("error", function(code, reason) {
+    conn.on("error", function(code, reason) {
         console.log("Miyako Websocket error")
     });
 }).listen(PORT2)
