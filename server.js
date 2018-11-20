@@ -7,10 +7,14 @@ var screenReady = false;
 var pepperReady = false;
 var mscreenReady = false;
 var mpepperReady = false;
+var usascreenReady = false;
+var usapepperReady = false;
 var screen = null;
 var pepper = null;
 var mscreen = null;
 var mpepper = null;
+var usascreen = null;
+var usapepper = null;
 
 var server = ws.createServer(function(conn) {
     conn.on("text", function(str) {
@@ -37,6 +41,8 @@ var server = ws.createServer(function(conn) {
             console.log("Sended data is:Pepper Pong")
         }
         
+        
+        
         if (str === "mscreen") {
             mscreen = conn;
             mscreenReady = true;
@@ -58,6 +64,33 @@ var server = ws.createServer(function(conn) {
             conn.sendText("miyako Pepper Pong");
             console.log("Sended data is:miyako Pepper Pong")
         }
+        
+        
+        
+        if (str === "usascreen") {
+            usascreen = conn;
+            usascreenReady = true;
+            console.log("usa Screen is ready")
+        }
+        if (str === "usapepper") {
+            usapepper = conn;
+            usapepperReady = true;
+            console.log("usa Pepper is ready")
+        }
+        if (usascreenReady && usapepperReady) {
+            usascreen.sendText(str);
+        }
+        if (str === "usaScreen Ping") {
+            conn.sendText("usaScreen Pong");
+            console.log("Sended data is:usa Screen Pong")
+        }
+        if (str === "usaPepper Ping") {
+            conn.sendText("usaPepper Pong");
+            console.log("Sended data is:usa Pepper Pong")
+        }
+        
+        
+        
         conn.sendText(str);
     })
     conn.on("close", function(code, reason) {
