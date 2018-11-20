@@ -79,6 +79,7 @@ var server = ws.createServer(function(conn) {
         }
         if (usascreenReady && usapepperReady) {
             usascreen.sendText(str);
+            usapepper.sendText(str);
         }
         if (str === "usaScreen Ping") {
             conn.sendText("usaScreen Pong");
