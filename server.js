@@ -101,7 +101,7 @@ var server = ws.createServer(function(conn) {
             ancscreenReady = true;
             console.log("Aqua Naha Ch Screen is ready")
         }
-        if (str === "pepper") {
+        if (str === "ancpepper") {
             ancpepper = conn;
             ancpepperReady = true;
             console.log("Aqua Naha Ch Pepper is ready")
