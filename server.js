@@ -11,6 +11,10 @@ var usascreenReady = false;
 var usapepperReady = false;
 var ancscreenReady = false;
 var ancpepperReady = false;
+var sky1screenReady = false;
+var sky1pepperReady = false;
+var sky2screenReady = false;
+var sky2pepperReady = false;
 var screen = null;
 var pepper = null;
 var mscreen = null;
@@ -19,6 +23,10 @@ var usascreen = null;
 var usapepper = null;
 var ancscreen = null;
 var ancpepper = null;
+var sky1screen = null;
+var sky1pepper = null;
+var sky2screen = null;
+var sky2pepper = null;
 
 var server = ws.createServer(function(conn) {
     conn.on("text", function(str) {
@@ -117,6 +125,54 @@ var server = ws.createServer(function(conn) {
         if (str === "Pepper Ping") {
             conn.sendText("Aqua Naha Ch Pepper Pong");
             console.log("Sended data is:Aqua Naha Ch Pepper Pong")
+        }
+        
+        
+        
+        if (str === "sky1screen") {
+            sky1screen = conn;
+            sky1screenReady = true;
+            console.log("sky1Screen is ready")
+        }
+        if (str === "sky1pepper") {
+            sky1pepper = conn;
+            sky1pepperReady = true;
+            console.log("sky1Pepper is ready")
+        }
+        if (sky1screenReady && sky1pepperReady) {
+            sky1screen.sendText(str);
+        }
+        if (str === "sky1Screen Ping") {
+            conn.sendText("sky1Screen Pong");
+            console.log("Sended data is:sky1Screen Pong")
+        }
+        if (str === "sky1Pepper Ping") {
+            conn.sendText("sky1Pepper Pong");
+            console.log("Sended data is:sky1Pepper Pong")
+        }
+        
+        
+        
+        if (str === "sky2screen") {
+            sky2screen = conn;
+            sky2screenReady = true;
+            console.log("sky2Screen is ready")
+        }
+        if (str === "sky2pepper") {
+            sky2pepper = conn;
+            sky2pepperReady = true;
+            console.log("sky2Pepper is ready")
+        }
+        if (sky2screenReady && sky2pepperReady) {
+            sky2screen.sendText(str);
+        }
+        if (str === "sky2Screen Ping") {
+            conn.sendText("sky2Screen Pong");
+            console.log("Sended data is:sky2Screen Pong")
+        }
+        if (str === "sky2Pepper Ping") {
+            conn.sendText("sky2Pepper Pong");
+            console.log("Sended data is:sky2Pepper Pong")
         }
         
         
